@@ -21,8 +21,9 @@ class Orders {
       randomDates.add(today.subtract(Duration(minutes: r.nextInt(7200) + 1)));
       List<Item> currentItems = [];
       for (int j = 2; j <= maxItems; ++j) {
-        currentItems.add(Items.getItemByIndex(r.nextInt(Items.items.length)));
+        currentItems.add(Items.items[r.nextInt(Items.items.length)]);
       }
+      randomItems.add(currentItems);
     }
     randomDates.sort();
 

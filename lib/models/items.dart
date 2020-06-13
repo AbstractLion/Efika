@@ -12,13 +12,14 @@ class Items {
   static Future<void> parseInformation() async {
     final jsonItems = await rootBundle.loadString('assets/items.txt');
     final itemsList = json.decode(jsonItems);
+
     Random r = Random();
     itemsList.forEach((item) {
       try {
         items.add(Item(
           id: r.nextInt(9999999),
-          name: item.name,
-          imageUrl: item.imageUrl,
+          name: item['name'],
+          imageUrl: item['imageUrl'],
           aisle: r.nextInt(13) + 1,
           shelfFromBottom: r.nextInt(3) + 1,
           shelfFromEnd: r.nextInt(5) + 1,
@@ -29,8 +30,11 @@ class Items {
             r.nextInt(20) + 1,
           ),
         ));
-      } catch (e) {}
+      } catch (e) {
+        print('Error');
+      }
     });
+    print(items.length);
   }
 
   static Item getItemByIndex(int index) {
