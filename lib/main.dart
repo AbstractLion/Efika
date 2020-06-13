@@ -1,3 +1,4 @@
+import 'package:efika/constants.dart';
 import 'package:efika/screens/item_details_screen.dart';
 import 'package:efika/screens/order_fulfillment_screen.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         // brightness: Brightness.dark,
         primarySwatch: Colors.deepPurple,
-        accentColor: Colors.orange,
+        accentColor: Constants.accentColor,
         cursorColor: Colors.orange,
         // fontFamily: 'SourceSansPro',
         textTheme: TextTheme(
