@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../widgets/efika_app_bar.dart';
 
-class OrderChecklistScreen extends StatelessWidget {
-  static const routeName = '/order_checklist';
+class OrderFulfillmentScreen extends StatelessWidget {
+  static const routeName = '/order_fulfillment';
 
   @override
   Widget build(BuildContext context) {

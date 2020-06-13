@@ -30,6 +30,8 @@ dependencies:
   font_awesome_flutter: ^8.8.1
   provider: ^4.1.3
   getflutter: ^1.0.11
+  intro_views_flutter: ^2.8.1
+  tuple: ^1.0.3
 
 dev_dependencies:
   flutter_test:
