@@ -1,6 +1,8 @@
 import 'package:efika/constants.dart';
 import 'package:efika/screens/item_details_screen.dart';
+import 'package:efika/screens/order_fulfillment_save_item_screen.dart';
 import 'package:efika/screens/order_fulfillment_screen.dart';
+import 'package:efika/screens/order_fulfillment_steps_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -63,6 +65,10 @@ class MyApp extends StatelessWidget {
         HomeScreen.routeName: (context) => HomeScreen(),
         ItemDetailsScreen.routeName: (context) => ItemDetailsScreen(),
         OrderFulfillmentScreen.routeName: (context) => OrderFulfillmentScreen(),
+        OrderFulfillmentStepsScreen.routeName: (context) =>
+            OrderFulfillmentStepsScreen(),
+        OrderFulfillmentSaveItemScreen.routeName: (context) =>
+            OrderFulfillmentSaveItemScreen(),
       },
     );
   }
