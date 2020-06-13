@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:tuple/tuple.dart';
 
 class Item {
+  int id;
   String name;
-  List<String> descriptions = [];
+  List<String> locationDescriptions = [];
   String imageUrl;
   int aisle;
   int shelfFromBottom;
@@ -13,8 +14,9 @@ class Item {
   Tuple3<int, int, int> dimensions;
 
   Item({
+    @required this.id,
     @required this.name,
-    this.descriptions,
+    this.locationDescriptions,
     @required this.imageUrl,
     this.aisle,
     this.shelfFromBottom,

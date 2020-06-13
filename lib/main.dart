@@ -7,6 +7,7 @@ import 'package:efika/screens/order_fulfillment_steps_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'models/items.dart';
 import 'screens/home_screen.dart';
 import 'screens/login_screen.dart';
 
@@ -17,6 +18,8 @@ void main() {
           SystemUiOverlayStyle.dark.systemNavigationBarColor,
     ),
   );
+  WidgetsFlutterBinding.ensureInitialized();
+  Items.parseInformation();
   runApp(MyApp());
 }
 

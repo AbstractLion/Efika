@@ -1,24 +1,35 @@
-import 'item.dart';
+import 'dart:math';
+
+import 'package:efika/models/item.dart';
+import 'package:efika/models/items.dart';
+
 import 'order.dart';
 
 class Orders {
-  static final List<Order> orders = [
-    Order(
-      id: 1,
-      items: [
-        Item(
-          imageUrl:
-              'https://i5.walmartimages.ca/images/Enlarge/865/709/6000199865709.jpg',
-          name:
-              "LEGO Disney Pixar’s Toy Story Buzz & Bo Peep’s Playground Adventure 10768 Building Kit (139 Piece)",
-          descriptions: [],
-          aisle: 12,
-          shelfFromBottom: 2,
-          leftSide: false,
-          orientationDescription: 'Facing the bicycles.',
-          shelfFromEnd: 2,
-        ),
-      ],
-    ),
-  ];
+  static final List<Order> orders = [];
+
+  static const int numOrders = 20;
+  static const int maxItems = 20;
+
+  void generateOrders() {
+    final randomDates = [];
+    final randomItems = [];
+
+    DateTime today = DateTime.now();
+    final Random r = Random();
+    for (int i = 0; i < numOrders; ++i) {
+      randomDates.add(today.subtract(Duration(minutes: r.nextInt(7200) + 1)));
+      List<Item> currentItems = [];
+      for (int j = 2; j <= maxItems; ++j) {
+        currentItems.add(Items.getItemByIndex(r.nextInt(Items.items.length)));
+      }
+    }
+    randomDates.sort();
+
+    for (int i = 0; i < numOrders; ++i) {
+      orders.add(
+        Order(id: i, dateOrdered: randomDates[i], items: randomItems[i]),
+      );
+    }
+  }
 }
