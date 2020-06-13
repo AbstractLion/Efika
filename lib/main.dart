@@ -8,10 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'models/items.dart';
+import 'models/orders.dart';
 import 'screens/home_screen.dart';
 import 'screens/login_screen.dart';
 
-void main() {
+void main() async {
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(
       systemNavigationBarColor:
@@ -19,7 +20,8 @@ void main() {
     ),
   );
   WidgetsFlutterBinding.ensureInitialized();
-  Items.parseInformation();
+  await Items.parseInformation();
+  Orders.generateOrders();
   runApp(MyApp());
 }
 

@@ -37,6 +37,7 @@ class _IntroScreenState extends State<IntroScreen> {
       pages: [
         PageViewModel(
           title: "Efika - Helping workers and customers shop more efficiently.",
+          image: Container(),
           body:
               "With the COVID-19 pandemic causing a sharp increase in the demand for pickups and deliveries, we figured that we needed to provide workers an easy way to retrieve the items required to fulfill a customer's purchase.",
           decoration: pageDecoration,
@@ -44,6 +45,7 @@ class _IntroScreenState extends State<IntroScreen> {
         PageViewModel(
           title:
               "Tired of having different workers struggle to locate the same items again and again?",
+          image: Container(),
           body:
               "Efika makes sure that when a worker finds an item, that it'll be easy for the next worker to find it, even if they haven't ever seen it before.",
           decoration: pageDecoration,
@@ -51,18 +53,21 @@ class _IntroScreenState extends State<IntroScreen> {
         PageViewModel(
           title:
               "Struggling with a slow and unorganized method of obtaining items?",
+          image: Container(),
           body:
               "With enough information, Efika can generate an efficient path for a worker to retrieve all their items in one go, saving time and hassle.",
           decoration: pageDecoration,
         ),
         PageViewModel(
           title: "Worried about an incomplete inventory?",
+          image: Container(),
           body:
               "Efika is to be used by both customers and workers, so that customers can also contribute to helping populate an exhaustive inventory for your store.",
           decoration: pageDecoration,
         ),
         PageViewModel(
           title: "Ready to get started with Efika?",
+          image: Container(),
           body: '',
           decoration: pageDecoration,
         ),

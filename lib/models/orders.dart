@@ -11,7 +11,7 @@ class Orders {
   static const int numOrders = 20;
   static const int maxItems = 20;
 
-  void generateOrders() {
+  static void generateOrders() {
     final randomDates = [];
     final randomItems = [];
 
