@@ -1,6 +1,6 @@
 import 'package:efika/models/order.dart';
 import 'package:efika/models/orders.dart';
-import 'package:efika/screens/order_checklist_screen.dart';
+import 'package:efika/screens/order_fulfillment_screen.dart';
 import 'package:efika/widgets/efika_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:getflutter/components/button/gf_button.dart';
@@ -30,7 +30,7 @@ class OrdersScreen extends StatelessWidget {
                   onPressed: () {
                     Navigator.pushNamed(
                       context,
-                      OrderChecklistScreen.routeName,
+                      OrderFulfillmentScreen.routeName,
                       arguments: RouteParams(
                         index,
                       )
