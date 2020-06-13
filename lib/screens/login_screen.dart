@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart' show timeDilation;
 import 'package:flutter_login/flutter_login.dart';
-import 'package:geomhacks/screens/home.dart';
 
 import '../constants.dart';
+import '../screens/home_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   static const routeName = '/auth';
@@ -31,7 +31,7 @@ class LoginScreen extends StatelessWidget {
       },
       onSubmitAnimationCompleted: () {
         Navigator.of(context).pushReplacement(FadePageRoute(
-          builder: (context) => HomeNavigation(),
+          builder: (context) => HomeScreen(),
         ));
       },
       onRecoverPassword: (name) {
