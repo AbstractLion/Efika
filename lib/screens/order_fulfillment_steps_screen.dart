@@ -2,13 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intro_views_flutter/Models/page_view_model.dart';
 import 'package:intro_views_flutter/intro_views_flutter.dart';
 
-/*
-  This screen is displayed when the user checks off an item that hasn't been
-  stored in the database.
- */
-
-class OrderSaveScreen extends StatelessWidget {
-  static const routeName = '/order_checklist';
+class OrderFulfillmentStepsScreen extends StatelessWidget {
+  static const routeName = '/order_fulfillment_steps';
 
   final List<PageViewModel> _pages = [
     PageViewModel(
