@@ -6,7 +6,7 @@ import '../constants.dart';
 import '../screens/home_screen.dart';
 
 class LoginScreen extends StatelessWidget {
-  static const routeName = '/auth';
+  static const routeName = '/login';
 
   Duration get loginTime => Duration(milliseconds: timeDilation.ceil() * 2250);
 

@@ -1,3 +1,5 @@
+import 'package:efika/screens/item_details_screen.dart';
+import 'package:efika/screens/order_checklist_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -58,6 +60,8 @@ class MyApp extends StatelessWidget {
       routes: {
         LoginScreen.routeName: (context) => LoginScreen(),
         HomeScreen.routeName: (context) => HomeScreen(),
+        ItemDetailsScreen.routeName: (context) => ItemDetailsScreen(),
+        OrderChecklistScreen.routeName: (context) => OrderChecklistScreen(),
       },
     );
   }
