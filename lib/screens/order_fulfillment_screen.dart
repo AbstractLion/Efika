@@ -6,8 +6,8 @@ class RouteParams {
   RouteParams(this.index);
 }
 
-class OrderChecklistScreen extends StatelessWidget {
-  static const routeName = '/order_checklist';
+class OrderFulfillmentScreen extends StatelessWidget {
+  static const routeName = '/order_fulfillment';
   @override
   Widget build(BuildContext context) {
     final RouteParams routeParams = ModalRoute.of(context).settings.arguments;

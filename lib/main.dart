@@ -1,6 +1,6 @@
 import 'package:efika/constants.dart';
 import 'package:efika/screens/item_details_screen.dart';
-import 'package:efika/screens/order_checklist_screen.dart';
+import 'package:efika/screens/order_fulfillment_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
