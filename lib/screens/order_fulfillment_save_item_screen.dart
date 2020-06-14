@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:camera/camera.dart';
 import 'package:efika/globals.dart' as globals;
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter_compass/flutter_compass.dart';
 import 'package:getflutter/getflutter.dart';
 import 'package:intro_slider/intro_slider.dart';
@@ -55,25 +56,49 @@ class _OrderFulfillmentSaveItemScreenState
     stepSlides.add(_createCameraSlide(context));
     stepSlides.add(_createCompassSlide(context));
 
+    final BorderRadiusGeometry radius = BorderRadius.only(
+      topLeft: Radius.circular(24.0),
+      topRight: Radius.circular(24.0),
+    );
+
     return new SlidingUpPanel(
       minHeight: 0,
       maxHeight: MediaQuery.of(context).size.height - 100,
       controller: _pc,
       header: Container(
+        width: MediaQuery.of(context).size.width,
         height: 50,
-        width: 50,
-        color: Colors.green,
+        decoration: BoxDecoration(
+          borderRadius: radius,
+        ),
+        child: Center(
+          child: Padding(
+            padding: EdgeInsets.all(20),
+            child: Container(
+              height: 5,
+              width: 200,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(3)),
+                color: Colors.grey,
+              ),
+            ),
+          ),
+        ),
       ),
+      borderRadius: radius,
       panel: Scaffold(
         body: Container(
           child: ListView(
             children: [
-              Text(
-                'Image Review',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 30,
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 25),
+                child: Text(
+                  'Image Review',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 30,
+                  ),
                 ),
               ),
               Container(
