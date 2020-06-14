@@ -34,7 +34,6 @@ class Items {
         print('Error');
       }
     });
-    print(items.length);
   }
 
   static Item getItemByIndex(int index) {

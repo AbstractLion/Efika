@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:efika/models/item.dart';
 import 'package:efika/models/items.dart';
+import 'package:efika/models/users.dart';
 
 import 'order.dart';
 
@@ -27,10 +28,14 @@ class Orders {
     }
     randomDates.sort();
 
+    final int startId = r.nextInt(1000000) + 100000;
     for (int i = 0; i < numOrders; ++i) {
-      orders.add(
-        Order(id: i, dateOrdered: randomDates[i], items: randomItems[i]),
-      );
+      orders.add(Order(
+        id: startId - i * 100 - r.nextInt(100),
+        dateOrdered: randomDates[i],
+        items: randomItems[i],
+        orderer: Users.users[r.nextInt(Users.users.length)],
+      ));
     }
   }
 }

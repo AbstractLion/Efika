@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
+import '../constants.dart';
+
 class IntroScreen extends StatefulWidget {
   static const String routeName = '/intro';
   @override
@@ -14,21 +16,18 @@ class _IntroScreenState extends State<IntroScreen> {
     Navigator.of(context).pushReplacementNamed('/login');
   }
 
-  Widget _buildImage(String assetName) {
-    return Align(
-      child: Image.asset('assets/$assetName.jpg', width: 350.0),
-      alignment: Alignment.bottomCenter,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    const bodyStyle = TextStyle(fontSize: 19.0);
+    const bodyStyle = TextStyle(fontSize: 19.0, color: Colors.white);
     const pageDecoration = const PageDecoration(
-      titleTextStyle: TextStyle(fontSize: 28.0, fontWeight: FontWeight.w700),
+      titleTextStyle: TextStyle(
+        fontSize: 28.0,
+        fontWeight: FontWeight.w700,
+        color: Colors.white,
+      ),
       bodyTextStyle: bodyStyle,
       descriptionPadding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
-      pageColor: Colors.white,
+      pageColor: Constants.backgroundColor,
       imagePadding: EdgeInsets.zero,
     );
 
@@ -37,7 +36,7 @@ class _IntroScreenState extends State<IntroScreen> {
       pages: [
         PageViewModel(
           title: "Efika - Helping workers and customers shop more efficiently.",
-          image: Container(),
+          image: Image.asset('assets/logo.png'),
           body:
               "With the COVID-19 pandemic causing a sharp increase in the demand for pickups and deliveries, we figured that we needed to provide workers an easy way to retrieve the items required to fulfill a customer's purchase.",
           decoration: pageDecoration,
@@ -73,16 +72,18 @@ class _IntroScreenState extends State<IntroScreen> {
         ),
       ],
       onDone: () => _onIntroEnd(context),
-      //onSkip: () => _onIntroEnd(context), // You can override onSkip callback
+      onSkip: () => _onIntroEnd(context), // You can override onSkip callback
       showSkipButton: true,
       skipFlex: 0,
       nextFlex: 0,
-      skip: const Text('Skip'),
+      skip: const Text('Skip', style: TextStyle(color: Colors.white)),
       next: const Icon(Icons.arrow_forward),
-      done: const Text('Done', style: TextStyle(fontWeight: FontWeight.w600)),
+      done: const Text('Done',
+          style: TextStyle(fontWeight: FontWeight.w600, color: Colors.white)),
       dotsDecorator: const DotsDecorator(
         size: Size(10.0, 10.0),
         color: Color(0xFFBDBDBD),
+        activeColor: Colors.white,
         activeSize: Size(22.0, 10.0),
         activeShape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(25.0)),

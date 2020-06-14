@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class Worker {
+class User {
   String name;
   String avatarUrl;
 
-  Worker({@required this.name, this.avatarUrl});
+  User({@required this.name, this.avatarUrl});
 }

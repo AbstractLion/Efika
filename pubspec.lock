@@ -22,6 +22,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.4.1"
+  auto_size_text:
+    dependency: transitive
+    description:
+      name: auto_size_text
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.0"
   bloc_pattern:
     dependency: transitive
     description:
@@ -92,6 +99,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.0"
+  expandable_bottom_bar:
+    dependency: "direct main"
+    description:
+      name: expandable_bottom_bar
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.2"
   fancy_bottom_navigation:
     dependency: "direct main"
     description:
@@ -111,6 +125,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_beautiful_popup:
+    dependency: "direct main"
+    description:
+      name: flutter_beautiful_popup
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.5.0"
   flutter_login:
     dependency: "direct main"
     description:
@@ -151,6 +172,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.12"
+  intl:
+    dependency: "direct main"
+    description:
+      name: intl
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.16.1"
   intro_views_flutter:
     dependency: "direct main"
     description:

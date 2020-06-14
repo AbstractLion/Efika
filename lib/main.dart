@@ -3,12 +3,13 @@ import 'package:efika/screens/intro_screen.dart';
 import 'package:efika/screens/item_details_screen.dart';
 import 'package:efika/screens/order_fulfillment_save_item_screen.dart';
 import 'package:efika/screens/order_fulfillment_screen.dart';
-import 'package:efika/screens/order_fulfillment_steps_screen.dart';
+import 'package:expandable_bottom_bar/expandable_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'models/items.dart';
 import 'models/orders.dart';
+import 'models/users.dart';
 import 'screens/home_screen.dart';
 import 'screens/login_screen.dart';
 
@@ -21,6 +22,7 @@ void main() async {
   );
   WidgetsFlutterBinding.ensureInitialized();
   await Items.parseInformation();
+  await Users.parseUsers();
   Orders.generateOrders();
   runApp(MyApp());
 }
@@ -31,17 +33,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Login Demo',
       theme: ThemeData(
-        // brightness: Brightness.dark,
-        primarySwatch: Colors.deepPurple,
+        primaryColor: Color.fromRGBO(0, 148, 222, 1),
         accentColor: Constants.accentColor,
-        cursorColor: Colors.orange,
+        cursorColor: Colors.white,
         // fontFamily: 'SourceSansPro',
         textTheme: TextTheme(
           headline3: TextStyle(
             fontFamily: 'OpenSans',
             fontSize: 45.0,
             // fontWeight: FontWeight.w400,
-            color: Colors.orange,
+            color: Colors.white,
           ),
           button: TextStyle(
             // OpenSans is similar to NotoSans but the uppercases look a bit better IMO
@@ -51,7 +52,6 @@ class MyApp extends StatelessWidget {
             fontFamily: 'NotoSans',
             fontSize: 12.0,
             fontWeight: FontWeight.normal,
-            color: Colors.deepPurple[300],
           ),
           headline1: TextStyle(fontFamily: 'Quicksand'),
           headline2: TextStyle(fontFamily: 'Quicksand'),
@@ -71,9 +71,10 @@ class MyApp extends StatelessWidget {
         LoginScreen.routeName: (context) => LoginScreen(),
         HomeScreen.routeName: (context) => HomeScreen(),
         ItemDetailsScreen.routeName: (context) => ItemDetailsScreen(),
-        OrderFulfillmentScreen.routeName: (context) => OrderFulfillmentScreen(),
-        OrderFulfillmentStepsScreen.routeName: (context) =>
-            OrderFulfillmentStepsScreen(),
+        OrderFulfillmentScreen.routeName: (context) =>
+            DefaultBottomBarController(
+              child: OrderFulfillmentScreen(),
+            ),
         OrderFulfillmentSaveItemScreen.routeName: (context) =>
             OrderFulfillmentSaveItemScreen(),
       },

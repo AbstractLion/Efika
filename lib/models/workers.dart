@@ -1,36 +1,36 @@
+import 'package:efika/models/users.dart';
 import 'package:flutter/material.dart';
 import 'package:search_app_bar/searcher.dart';
 
-import 'worker.dart';
+import 'user.dart';
 
-class Workers with ChangeNotifier implements Searcher<Worker> {
-  static List<Worker> workers = [
-    Worker(name: 'Leon Si'),
-    Worker(
+class Workers with ChangeNotifier implements Searcher<User> {
+  static List<User> workers = [
+    User(name: 'Leon Si'),
+    User(
       name: 'Dragon He',
       avatarUrl:
           'https://media-exp1.licdn.com/dms/image/C4D03AQEyzcJ9UyrGtA/profile-displayphoto-shrink_200_200/0?e=1597276800&v=beta&t=n0_a6sYJQuYiyCQ8Aa3XhqPSLZWOPn6IZPJXqawjhYQ',
     ),
-    Worker(name: 'Avaneesh Kulkarni'),
-    Worker(name: 'Kevin Wang'),
+    User(name: 'Avaneesh Kulkarni'),
+    User(name: 'Kevin Wang'),
+    ...Users.users.skip(30)
   ];
 
-  List<Worker> filteredWorkers;
+  List<User> filteredWorkers;
 
   Workers() {
     filteredWorkers = []..addAll(workers);
   }
 
   @override
-  // TODO: implement data
-  List<Worker> get data => workers;
+  List<User> get data => workers;
 
   @override
-  // TODO: implement onDataFiltered
-  Function(List<Worker> p1) get onDataFiltered => _filterWorkers;
+  Function(List<User> p1) get onDataFiltered => _filterWorkers;
 
   dynamic _filterWorkers(List<dynamic> workersList) {
-    filteredWorkers = workersList as List<Worker>;
+    filteredWorkers = workersList as List<User>;
     notifyListeners();
   }
 }
