@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:efika/constants.dart';
 import 'package:efika/screens/intro_screen.dart';
 import 'package:efika/screens/order_fulfillment_save_item_screen.dart';
@@ -6,20 +7,26 @@ import 'package:expandable_bottom_bar/expandable_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'globals.dart' as globals;
 import 'models/items.dart';
 import 'models/orders.dart';
 import 'models/users.dart';
 import 'screens/home_screen.dart';
 import 'screens/login_screen.dart';
 
-void main() async {
+Future<void> main() async {
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(
       systemNavigationBarColor:
           SystemUiOverlayStyle.dark.systemNavigationBarColor,
     ),
   );
-  WidgetsFlutterBinding.ensureInitialized();
+  try {
+    WidgetsFlutterBinding.ensureInitialized();
+    globals.cameras = await availableCameras();
+  } on CameraException catch (e) {
+    print(e.code + e.description);
+  }
   await Items.parseInformation();
   await Users.parseUsers();
   Orders.generateOrders();

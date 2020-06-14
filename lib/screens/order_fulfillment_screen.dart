@@ -86,7 +86,10 @@ class _OrderFulfillmentScreenState extends State<OrderFulfillmentScreen> {
                 child: GFButton(
                   text: 'Check Off',
                   color: Constants.accentColor,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context)
+                        .pushNamed('/order_fulfillment_save_item');
+                  },
                 ),
               ),
             ],
@@ -196,11 +199,11 @@ class _ItemDetailViewState extends State<ItemDetailView> {
                         ),
                       ),
                     ),
-                    Stack(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(bottom: 15),
-                          child: PieChart(
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 15),
+                      child: Stack(
+                        children: [
+                          PieChart(
                             dataMap: compassMap,
                             chartType: ChartType.ring,
                             showChartValueLabel: false,
@@ -214,31 +217,32 @@ class _ItemDetailViewState extends State<ItemDetailView> {
                             colorList: compassColorList,
                             showLegends: false,
                           ),
-                        ),
-                        Positioned.fill(
-                          child: Center(
-                            child: RawMaterialButton(
-                              onPressed: () {
-                                setState(() {
-                                  isCompassOn = !isCompassOn;
-                                });
-                              },
-                              elevation: 8.0,
-                              fillColor: isCompassOn
-                                  ? Constants.backgroundColor
-                                  : Constants.backgroundColor.withOpacity(0.5),
-                              child: Icon(
-                                isCompassOn
-                                    ? MdiIcons.compass
-                                    : MdiIcons.compassOff,
-                                size: 30,
+                          Positioned.fill(
+                            child: Center(
+                              child: RawMaterialButton(
+                                onPressed: () {
+                                  setState(() {
+                                    isCompassOn = !isCompassOn;
+                                  });
+                                },
+                                elevation: 8.0,
+                                fillColor: isCompassOn
+                                    ? Constants.backgroundColor
+                                    : Constants.backgroundColor
+                                        .withOpacity(0.5),
+                                child: Icon(
+                                  isCompassOn
+                                      ? MdiIcons.compass
+                                      : MdiIcons.compassOff,
+                                  size: 30,
+                                ),
+                                padding: EdgeInsets.all(25.0),
+                                shape: CircleBorder(),
                               ),
-                              padding: EdgeInsets.all(25.0),
-                              shape: CircleBorder(),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                     CarouselSlider(
                       options: CarouselOptions(
