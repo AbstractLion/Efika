@@ -6,7 +6,6 @@ import 'user.dart';
 
 class Workers with ChangeNotifier implements Searcher<User> {
   static List<User> workers = [
-    User(name: 'Leon Si'),
     User(
       name: 'Dragon He',
       avatarUrl:

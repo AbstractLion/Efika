@@ -16,20 +16,22 @@ class Items {
     Random r = Random();
     itemsList.forEach((item) {
       try {
-        items.add(Item(
-          id: r.nextInt(9999999),
-          name: item['name'],
-          imageUrl: item['imageUrl'],
-          aisle: r.nextInt(13) + 1,
-          shelfFromBottom: r.nextInt(3) + 1,
-          shelfFromEnd: r.nextInt(5) + 1,
-          leftSide: r.nextDouble() > 0.5,
-          dimensions: Tuple3<int, int, int>(
-            r.nextInt(5) + 1,
-            r.nextInt(10) + 1,
-            r.nextInt(20) + 1,
+        items.add(
+          Item(
+            id: r.nextInt(9999999),
+            name: item['name'],
+            imageUrl: item['imageUrl'],
+            aisle: r.nextInt(13) + 1,
+            shelfFromBottom: r.nextInt(3) + 1,
+            shelfFromEnd: r.nextInt(5) + 1,
+            leftSide: r.nextDouble() > 0.5,
+            dimensions: Tuple3<int, int, int>(
+              r.nextInt(5) + 1,
+              r.nextInt(10) + 1,
+              r.nextInt(20) + 1,
+            ),
           ),
-        ));
+        );
       } catch (e) {
         print('Error');
       }

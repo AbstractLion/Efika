@@ -43,6 +43,7 @@ dependencies:
   pie_chart: ^3.1.1
   avatar_glow: ^1.2.0
   material_design_icons_flutter: 4.0.5345
+  carousel_slider: ^2.1.0
 
 dev_dependencies:
   flutter_test:

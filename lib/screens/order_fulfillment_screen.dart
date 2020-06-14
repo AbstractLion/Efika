@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:efika/models/item.dart';
 import 'package:efika/models/order.dart';
 import 'package:efika/models/orders.dart';
@@ -46,8 +47,8 @@ class _OrderFulfillmentScreenState extends State<OrderFulfillmentScreen> {
         onVerticalDragEnd: DefaultBottomBarController.of(context).onDragEnd,
         child: FloatingActionButton.extended(
           label: Text('Items'),
-          elevation: 2,
-          backgroundColor: Constants.accentColor,
+          elevation: 20,
+          backgroundColor: Constants.backgroundColor,
           foregroundColor: Colors.white,
           onPressed: () => DefaultBottomBarController.of(context).swap(),
         ),
@@ -56,9 +57,15 @@ class _OrderFulfillmentScreenState extends State<OrderFulfillmentScreen> {
         expandedHeight: 500,
         horizontalMargin: 16,
         shape: AutomaticNotchedShape(
-            RoundedRectangleBorder(), StadiumBorder(side: BorderSide())),
+          RoundedRectangleBorder(),
+          StadiumBorder(side: BorderSide()),
+        ),
         expandedBackColor: Colors.white,
-        expandedBody: ItemsListView(order),
+        expandedBody: ItemsListView(order, setCurrentItemIndex: (index) {
+          setState(() {
+            currentItemIndex = index;
+          });
+        }),
         bottomAppBarColor: Constants.backgroundColor,
         bottomAppBarBody: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -66,18 +73,20 @@ class _OrderFulfillmentScreenState extends State<OrderFulfillmentScreen> {
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
               Expanded(
-                child: Text(
-                  "Tets",
-                  textAlign: TextAlign.center,
+                child: GFButton(
+                  text: 'Out of Stock?',
+                  color: GFColors.DANGER,
+                  onPressed: () {},
                 ),
               ),
               Spacer(
                 flex: 2,
               ),
               Expanded(
-                child: Text(
-                  "Stet",
-                  textAlign: TextAlign.center,
+                child: GFButton(
+                  text: 'Check Off',
+                  color: Constants.accentColor,
+                  onPressed: () {},
                 ),
               ),
             ],
@@ -97,82 +106,153 @@ class ItemDetailView extends StatefulWidget {
 }
 
 class _ItemDetailViewState extends State<ItemDetailView> {
-  bool isTrackingOn = false;
+  bool isCompassOn = false;
 
   @override
   Widget build(BuildContext context) {
-    Map<String, double> compassMap = Map();
-    compassMap.putIfAbsent('OtherPositions', () => 20);
-    compassMap.putIfAbsent('ItemPosition', () => 1);
-
-    return Column(
-      children: [
-        StreamBuilder<double>(
-          stream: FlutterCompass.events,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.none &&
-                snapshot.hasData == null) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-
-            double direction = snapshot.data;
-
-            if (direction == null) {
-              return Center(
-                child: Text('Device does not have sensors!'),
-              );
-            }
-
-            return Column(
-              children: [
-                Stack(
-                  children: [
-                    PieChart(
-                      dataMap: compassMap,
-                      chartType: ChartType.ring,
-                      showChartValueLabel: false,
-                      showChartValues: false,
-                      showChartValuesInPercentage: false,
-                      showChartValuesOutside: false,
-                      chartRadius: 200,
-                      initialAngle: direction * pi / 180,
-                      chartValueStyle: TextStyle(color: Colors.transparent),
-                      colorList: [
-                        Constants.backgroundColor.withOpacity(0.3),
-                        Constants.accentColor,
-                      ],
-                      showLegends: false,
-                    ),
-                    Positioned.fill(
-                      child: Center(
-                        child: RawMaterialButton(
-                          onPressed: () {
-                            setState(() {
-                              isTrackingOn = !isTrackingOn;
-                            });
-                          },
-                          elevation: 8.0,
-                          fillColor: isTrackingOn
-                              ? Constants.backgroundColor
-                              : Constants.backgroundColor.withOpacity(0.5),
-                          child: Icon(
-                            isTrackingOn
-                                ? MdiIcons.compass
-                                : MdiIcons.compassOff,
-                            size: 30,
+    final curImgList = []..addAll(widget.item.locationImages);
+    curImgList.insert(0, widget.item.imageUrl);
+    final List<Widget> imageSliders = curImgList
+        .map(
+          (item) => Container(
+            child: Container(
+              margin: EdgeInsets.all(5.0),
+              child: ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                child: Stack(
+                  children: <Widget>[
+                    Image.network(item, fit: BoxFit.cover, width: 1000.0),
+                    Positioned(
+                      bottom: 0.0,
+                      left: 0.0,
+                      right: 0.0,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              Color.fromARGB(100, 0, 0, 0),
+                              Color.fromARGB(0, 0, 0, 0)
+                            ],
+                            begin: Alignment.bottomCenter,
+                            end: Alignment.topCenter,
                           ),
-                          padding: EdgeInsets.all(25.0),
-                          shape: CircleBorder(),
+                        ),
+                        padding: EdgeInsets.symmetric(
+                          vertical: 10.0,
+                          horizontal: 20.0,
                         ),
                       ),
                     ),
                   ],
                 ),
-              ],
-            );
-          },
+              ),
+            ),
+          ),
+        )
+        .toList();
+
+    Map<String, double> compassMap = Map();
+    compassMap.putIfAbsent('OtherPositions', () => 20);
+    if (isCompassOn) compassMap.putIfAbsent('ItemPosition', () => 1);
+
+    return Wrap(
+      children: [
+        Column(
+          children: [
+            StreamBuilder<double>(
+              stream: FlutterCompass.events,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.none &&
+                    snapshot.hasData == null) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+
+                double direction = snapshot.data;
+
+                if (direction == null) {
+                  return Center(
+                    child: Text('Device does not have sensors!'),
+                  );
+                }
+
+                final List<Color> compassColorList = [
+                  Constants.backgroundColor
+                      .withOpacity(isCompassOn ? 0.3 : 0.15),
+                ];
+
+                if (isCompassOn) compassColorList.add(Constants.accentColor);
+
+                return Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 20),
+                      child: Text(
+                        widget.item.name,
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    Stack(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(bottom: 15),
+                          child: PieChart(
+                            dataMap: compassMap,
+                            chartType: ChartType.ring,
+                            showChartValueLabel: false,
+                            showChartValues: false,
+                            showChartValuesInPercentage: false,
+                            showChartValuesOutside: false,
+                            chartRadius: 150,
+                            initialAngle: direction * pi / 180,
+                            chartValueStyle:
+                                TextStyle(color: Colors.transparent),
+                            colorList: compassColorList,
+                            showLegends: false,
+                          ),
+                        ),
+                        Positioned.fill(
+                          child: Center(
+                            child: RawMaterialButton(
+                              onPressed: () {
+                                setState(() {
+                                  isCompassOn = !isCompassOn;
+                                });
+                              },
+                              elevation: 8.0,
+                              fillColor: isCompassOn
+                                  ? Constants.backgroundColor
+                                  : Constants.backgroundColor.withOpacity(0.5),
+                              child: Icon(
+                                isCompassOn
+                                    ? MdiIcons.compass
+                                    : MdiIcons.compassOff,
+                                size: 30,
+                              ),
+                              padding: EdgeInsets.all(25.0),
+                              shape: CircleBorder(),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    CarouselSlider(
+                      options: CarouselOptions(
+                        aspectRatio: 2.0,
+                        enlargeCenterPage: true,
+                        enableInfiniteScroll: false,
+                      ),
+                      items: imageSliders,
+                    ),
+                  ],
+                );
+              },
+            ),
+          ],
         ),
       ],
     );
@@ -181,8 +261,9 @@ class _ItemDetailViewState extends State<ItemDetailView> {
 
 class ItemsListView extends StatefulWidget {
   final Order order;
+  final void Function(int) setCurrentItemIndex;
 
-  ItemsListView(this.order);
+  ItemsListView(this.order, {this.setCurrentItemIndex});
 
   @override
   State<StatefulWidget> createState() => _ItemsListViewState();
@@ -217,18 +298,44 @@ class _ItemsListViewState extends State<ItemsListView> {
         itemCount: widget.order.items.length,
         itemBuilder: (BuildContext context, int index) {
           Item item = widget.order.items[index];
-          return GFListTile(
-            avatar: Image.network(
-              item.imageUrl,
-              fit: BoxFit.contain,
-              height: 50,
-              width: 50,
-            ),
-            title: Row(
-              children: [
-                Text(item.name),
-              ],
-            ),
+          return Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(
+                  left: 10,
+                  top: index == 0 ? 20 : 0,
+                  bottom: index == widget.order.items.length - 1 ? 40 : 0,
+                ),
+                child: Material(
+                  color: Colors.white,
+                  child: InkWell(
+                    child: Row(
+                      children: [
+                        Image.network(
+                          item.imageUrl,
+                          fit: BoxFit.contain,
+                          height: 50,
+                          width: 50,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(left: 10),
+                          child: Text(
+                            item.name,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    onTap: () {
+                      widget.setCurrentItemIndex(index);
+                    },
+                  ),
+                ),
+              ),
+              Divider(),
+            ],
           );
         },
       ),

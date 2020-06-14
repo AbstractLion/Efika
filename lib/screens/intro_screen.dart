@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
 import '../constants.dart';
@@ -44,7 +45,26 @@ class _IntroScreenState extends State<IntroScreen> {
         PageViewModel(
           title:
               "Tired of having different workers struggle to locate the same items again and again?",
-          image: Container(),
+          image: Container(
+            child: Stack(
+              children: [
+                Center(
+                  child: Icon(
+                    Icons.block,
+                    color: Colors.white,
+                    size: 250,
+                  ),
+                ),
+                Center(
+                  child: FaIcon(
+                    FontAwesomeIcons.redo,
+                    color: Colors.white,
+                    size: 100,
+                  ),
+                ),
+              ],
+            ),
+          ),
           body:
               "Efika makes sure that when a worker finds an item, that it'll be easy for the next worker to find it, even if they haven't ever seen it before.",
           decoration: pageDecoration,
@@ -52,22 +72,50 @@ class _IntroScreenState extends State<IntroScreen> {
         PageViewModel(
           title:
               "Struggling with a slow and unorganized method of obtaining items?",
-          image: Container(),
+          image: Container(
+            child: Center(
+              child: FaIcon(
+                FontAwesomeIcons.shippingFast,
+                color: Colors.white,
+                size: 200,
+              ),
+            ),
+          ),
           body:
               "With enough information, Efika can generate an efficient path for a worker to retrieve all their items in one go, saving time and hassle.",
           decoration: pageDecoration,
         ),
         PageViewModel(
           title: "Worried about an incomplete inventory?",
-          image: Container(),
+          image: Container(
+            child: Center(
+              child: FaIcon(
+                FontAwesomeIcons.boxes,
+                color: Colors.white,
+                size: 200,
+              ),
+            ),
+          ),
           body:
               "Efika is to be used by both customers and workers, so that customers can also contribute to helping populate an exhaustive inventory for your store.",
           decoration: pageDecoration,
         ),
         PageViewModel(
-          title: "Ready to get started with Efika?",
-          image: Container(),
-          body: '',
+          titleWidget: Container(
+            padding: EdgeInsets.only(top: 20),
+            child: Center(
+              child: Text(
+                "Ready to get started with Efika?",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 50,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+          bodyWidget: Image.asset('assets/logo.png'),
           decoration: pageDecoration,
         ),
       ],
@@ -77,7 +125,7 @@ class _IntroScreenState extends State<IntroScreen> {
       skipFlex: 0,
       nextFlex: 0,
       skip: const Text('Skip', style: TextStyle(color: Colors.white)),
-      next: const Icon(Icons.arrow_forward),
+      next: const Icon(Icons.arrow_forward, color: Colors.white),
       done: const Text('Done',
           style: TextStyle(fontWeight: FontWeight.w600, color: Colors.white)),
       dotsDecorator: const DotsDecorator(
