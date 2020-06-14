@@ -1,9 +1,15 @@
+import 'dart:math';
+
 import 'package:efika/models/item.dart';
 import 'package:efika/models/order.dart';
 import 'package:efika/models/orders.dart';
 import 'package:expandable_bottom_bar/expandable_bottom_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_compass/flutter_compass.dart';
 import 'package:getflutter/getflutter.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:pie_chart/pie_chart.dart';
 
 import '../constants.dart';
 import '../widgets/efika_app_bar.dart';
@@ -82,14 +88,94 @@ class _OrderFulfillmentScreenState extends State<OrderFulfillmentScreen> {
   }
 }
 
-class ItemDetailView extends StatelessWidget {
+class ItemDetailView extends StatefulWidget {
   final Item item;
-
   ItemDetailView(this.item);
 
   @override
+  State<StatefulWidget> createState() => _ItemDetailViewState();
+}
+
+class _ItemDetailViewState extends State<ItemDetailView> {
+  bool isTrackingOn = false;
+
+  @override
   Widget build(BuildContext context) {
-    return Container();
+    Map<String, double> compassMap = Map();
+    compassMap.putIfAbsent('OtherPositions', () => 20);
+    compassMap.putIfAbsent('ItemPosition', () => 1);
+
+    return Column(
+      children: [
+        StreamBuilder<double>(
+          stream: FlutterCompass.events,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.none &&
+                snapshot.hasData == null) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+
+            double direction = snapshot.data;
+
+            if (direction == null) {
+              return Center(
+                child: Text('Device does not have sensors!'),
+              );
+            }
+
+            return Column(
+              children: [
+                Stack(
+                  children: [
+                    PieChart(
+                      dataMap: compassMap,
+                      chartType: ChartType.ring,
+                      showChartValueLabel: false,
+                      showChartValues: false,
+                      showChartValuesInPercentage: false,
+                      showChartValuesOutside: false,
+                      chartRadius: 200,
+                      initialAngle: direction * pi / 180,
+                      chartValueStyle: TextStyle(color: Colors.transparent),
+                      colorList: [
+                        Constants.backgroundColor.withOpacity(0.3),
+                        Constants.accentColor,
+                      ],
+                      showLegends: false,
+                    ),
+                    Positioned.fill(
+                      child: Center(
+                        child: RawMaterialButton(
+                          onPressed: () {
+                            setState(() {
+                              isTrackingOn = !isTrackingOn;
+                            });
+                          },
+                          elevation: 8.0,
+                          fillColor: isTrackingOn
+                              ? Constants.backgroundColor
+                              : Constants.backgroundColor.withOpacity(0.5),
+                          child: Icon(
+                            isTrackingOn
+                                ? MdiIcons.compass
+                                : MdiIcons.compassOff,
+                            size: 30,
+                          ),
+                          padding: EdgeInsets.all(25.0),
+                          shape: CircleBorder(),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            );
+          },
+        ),
+      ],
+    );
   }
 }
 
@@ -103,6 +189,13 @@ class ItemsListView extends StatefulWidget {
 }
 
 class _ItemsListViewState extends State<ItemsListView> {
+  @override
+  void initState() {
+    super.initState();
+
+    _fetchPermissionStatus();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -140,5 +233,12 @@ class _ItemsListViewState extends State<ItemsListView> {
         },
       ),
     );
+  }
+
+  void _fetchPermissionStatus() async {
+    print(await Permission.locationWhenInUse.request());
+    if (await Permission.locationWhenInUse.request().isGranted) {
+      print('Permission locationWhenInUse granted.');
+    }
   }
 }

@@ -19,15 +19,18 @@ class ProfileScreen extends StatelessWidget {
             children: <Widget>[
               Spacer(flex: 3),
               GFAvatar(
-                backgroundImage: NetworkImage("https://media.discordapp.net/attachments/721448995322331167/721455140804231496/0.png"),
-                size: GFSize.LARGE*3,
+                backgroundImage: NetworkImage(
+                    "https://media.discordapp.net/attachments/721448995322331167/721455140804231496/0.png"),
+                size: GFSize.LARGE * 3,
               ),
               Spacer(),
               Text("Leon Si", style: TextStyle(fontSize: 30)),
               Spacer(),
               Row(
                 children: <Widget>[
-                  Text("Store: ", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+                  Text("Store: ",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
                   Text("Walmart", style: TextStyle(fontSize: 15)),
                 ],
               ),

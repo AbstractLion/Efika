@@ -77,7 +77,6 @@ class OrdersScreen extends StatelessWidget {
                   _popup.button(
                     label: 'Cancel',
                     onPressed: Navigator.of(context).pop,
-                    color: Colors.red,
                   ),
                   _popup.button(
                     label: 'Fulfill',

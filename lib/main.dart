@@ -1,6 +1,5 @@
 import 'package:efika/constants.dart';
 import 'package:efika/screens/intro_screen.dart';
-import 'package:efika/screens/item_details_screen.dart';
 import 'package:efika/screens/order_fulfillment_save_item_screen.dart';
 import 'package:efika/screens/order_fulfillment_screen.dart';
 import 'package:expandable_bottom_bar/expandable_bottom_bar.dart';
@@ -70,7 +69,6 @@ class MyApp extends StatelessWidget {
         IntroScreen.routeName: (context) => IntroScreen(),
         LoginScreen.routeName: (context) => LoginScreen(),
         HomeScreen.routeName: (context) => HomeScreen(),
-        ItemDetailsScreen.routeName: (context) => ItemDetailsScreen(),
         OrderFulfillmentScreen.routeName: (context) =>
             DefaultBottomBarController(
               child: OrderFulfillmentScreen(),
