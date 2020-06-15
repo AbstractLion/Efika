@@ -198,6 +198,8 @@ class _OrderFulfillmentSaveItemScreenState
 
     return Slide(
       title: "Save this item's location!",
+      styleTitle: TextStyle(color: Colors.black, fontSize: 20),
+      styleDescription: TextStyle(color: Colors.black, fontSize: 13),
       description:
           "The location of this item hasn't been found in our database. Help future workers find this item more easily by taking a picture of its location with its surroundings!",
       centerWidget: Container(
