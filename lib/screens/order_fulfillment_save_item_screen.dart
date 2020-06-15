@@ -9,10 +9,10 @@ import 'package:flutter_compass/flutter_compass.dart';
 import 'package:getflutter/getflutter.dart';
 import 'package:intro_slider/intro_slider.dart';
 import 'package:intro_slider/slide_object.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:photo_view/photo_view.dart';
-import 'package:pie_chart/pie_chart.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import '../constants.dart';
@@ -25,6 +25,12 @@ import '../constants.dart';
 class OrderFulfillmentSaveItemScreen extends StatefulWidget {
   static const routeName = '/order_fulfillment_save_item';
 
+  final void Function(int) setItemIndex;
+  final int itemIndex;
+
+  OrderFulfillmentSaveItemScreen(
+      {@required this.itemIndex, @required this.setItemIndex});
+
   @override
   State<StatefulWidget> createState() => _OrderFulfillmentSaveItemScreenState();
 }
@@ -36,6 +42,7 @@ class _OrderFulfillmentSaveItemScreenState
   PanelController _pc = PanelController();
   String _imagePath;
   List<Slide> stepSlides = [];
+  void Function(int) goToTab;
 
   @override
   void initState() {
@@ -140,7 +147,11 @@ class _OrderFulfillmentSaveItemScreenState
                       child: GFButton(
                         text: 'Confirm',
                         color: Constants.accentColor,
-                        onPressed: () {},
+                        onPressed: () async {
+                          await _pc.close();
+                          await _pc.hide();
+                          this.goToTab(1);
+                        },
                       ),
                     ),
                   ),
@@ -152,6 +163,17 @@ class _OrderFulfillmentSaveItemScreenState
       ),
       body: IntroSlider(
         slides: stepSlides,
+        onDonePress: () {
+          widget.setItemIndex(widget.itemIndex + 1);
+          Navigator.of(context).pop();
+        },
+        onSkipPress: () {
+          widget.setItemIndex(widget.itemIndex + 1);
+          Navigator.of(context).pop();
+        },
+        refFuncGoToTab: (refFunc) {
+          this.goToTab = refFunc;
+        },
       ),
     );
   }
@@ -214,11 +236,27 @@ class _OrderFulfillmentSaveItemScreenState
   }
 
   Slide _createCompassSlide(BuildContext context) {
-    Map<String, double> compassMap = Map();
-    compassMap.putIfAbsent('OtherPositions', () => 20);
-    compassMap.putIfAbsent('ItemPosition', () => 1);
-
     return Slide(
+      styleTitle: TextStyle(
+          color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20),
+      title: "Save the item's position.",
+      widgetDescription: Column(
+        children: [
+          Text(
+            "Please stand facing the aisle at the northern/eastern end of the aisle and point the phone in the direction of the item. Then, press the button below to save the item's relative position for other workers to locate more easily next time.",
+            style: TextStyle(color: Colors.black),
+          ),
+          GFButton(
+            text: 'Save',
+            onPressed: () {
+              showSimpleNotification(
+                Text("The item's orientation has been saved at "),
+                background: Colors.green,
+              );
+            },
+          )
+        ],
+      ),
       centerWidget: StreamBuilder<double>(
         stream: FlutterCompass.events,
         builder: (context, snapshot) {
@@ -237,29 +275,13 @@ class _OrderFulfillmentSaveItemScreenState
             );
           }
 
-          final List<Color> compassColorList = [
-            Constants.backgroundColor.withOpacity(0.3),
-            Constants.accentColor,
-          ];
-
-          return Stack(
-            children: [
-              PieChart(
-                dataMap: compassMap,
-                chartType: ChartType.ring,
-                showChartValueLabel: false,
-                showChartValues: false,
-                showChartValuesInPercentage: false,
-                showChartValuesOutside: false,
-                chartRadius: 150,
-                initialAngle: direction * pi / 180,
-                chartValueStyle: TextStyle(color: Colors.transparent),
-                colorList: compassColorList,
-                showLegends: false,
-              ),
-              // Positioned.fill(
-              // ),
-            ],
+          return Container(
+            constraints: BoxConstraints.tightFor(width: 200, height: 200),
+            alignment: Alignment.center,
+            child: Transform.rotate(
+              angle: ((direction ?? 0) * (pi / 180) * -1),
+              child: Image.asset('assets/compass.png'),
+            ),
           );
         },
       ),

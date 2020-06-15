@@ -1,9 +1,13 @@
+import 'package:efika/models/user.dart';
 import 'package:efika/widgets/efika_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:getflutter/components/avatar/gf_avatar.dart';
 import 'package:getflutter/getflutter.dart';
 
 class ProfileScreen extends StatelessWidget {
+  final User user;
+  ProfileScreen(this.user);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,11 +24,18 @@ class ProfileScreen extends StatelessWidget {
               Spacer(flex: 3),
               GFAvatar(
                 backgroundImage: NetworkImage(
-                    "https://media.discordapp.net/attachments/721448995322331167/721455140804231496/0.png"),
+                  user.avatarUrl,
+                ),
                 size: GFSize.LARGE * 3,
               ),
               Spacer(),
-              Text("Leon Si", style: TextStyle(fontSize: 30)),
+              Text(
+                user.name,
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
               Spacer(),
               Row(
                 children: <Widget>[
@@ -37,17 +48,23 @@ class ProfileScreen extends StatelessWidget {
               Spacer(),
               Row(
                 children: <Widget>[
-                  Column(
-                    children: <Widget>[
-                      Text("345", style: TextStyle(fontSize: 20)),
-                      Text("Fulfillments"),
-                    ],
+                  Padding(
+                    padding: EdgeInsets.only(right: 10),
+                    child: Column(
+                      children: <Widget>[
+                        Text(user.fulfillments.toString(), style: TextStyle(fontSize: 20)),
+                        Text("Fulfillments"),
+                      ],
+                    ),
                   ),
-                  Column(
-                    children: <Widget>[
-                      Text("3452", style: TextStyle(fontSize: 20)),
-                      Text("Items Saved"),
-                    ],
+                  Padding(
+                    padding: EdgeInsets.only(left: 10),
+                    child: Column(
+                      children: <Widget>[
+                        Text(user.itemsSaved.toString(), style: TextStyle(fontSize: 20)),
+                        Text("Items Saved"),
+                      ],
+                    ),
                   ),
                 ],
               ),

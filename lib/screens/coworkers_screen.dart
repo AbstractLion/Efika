@@ -1,4 +1,5 @@
 import 'package:efika/models/workers.dart';
+import 'package:efika/screens/profile_screen.dart';
 import 'package:efika/widgets/user_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -51,9 +52,19 @@ class CoworkersScreen extends StatelessWidget {
   }
 
   Widget _buildWorkerCard(BuildContext context, User worker) {
-    return GFListTile(
-      titleText: worker.name,
-      avatar: UserAvatar(worker.avatarUrl),
+    return InkWell(
+      child: GFListTile(
+        titleText: worker.name,
+        avatar: UserAvatar(worker.avatarUrl),
+      ),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ProfileScreen(worker),
+          ),
+        );
+      },
     );
   }
 }

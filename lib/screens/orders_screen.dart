@@ -64,12 +64,17 @@ class OrdersScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      _buildLabelText('Order ID: ', order.id.toString()),
+                      _buildLabelText('Ordered at: ',
+                          DateFormat.yMd().add_jm().format(order.dateOrdered)),
+                      _buildLabelText('Ordered by: ', order.orderer.name),
                       _buildLabelText(
                           '# of items: ', order.items.length.toString()),
                       _buildLabelText(
                           'Approximate Time: ',
-                          (order.items.length * 2.36).round().toString() +
+                          (order.items.length * 0.74).round().toString() +
                               ' minutes'),
+                      _buildLabelText("Can all items fit in a basket? ", "No")
                     ],
                   ),
                 ),
@@ -142,9 +147,12 @@ class OrdersScreen extends StatelessWidget {
         children: <TextSpan>[
           TextSpan(
             text: label,
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 14,
+            ),
           ),
-          TextSpan(text: text),
+          TextSpan(text: text, style: TextStyle(fontSize: 14)),
         ],
       ),
     );

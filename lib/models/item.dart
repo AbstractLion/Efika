@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:tuple/tuple.dart';
 
@@ -13,12 +15,14 @@ class Item {
   String orientationDescription;
   List<String> locationImages;
   Tuple3<int, int, int> dimensions;
+  double bearingOffset;
 
   Item({
     @required this.id,
     @required this.name,
     this.locationDescriptions = const [],
     @required this.imageUrl,
+    this.bearingOffset = pi / 2,
     this.aisle,
     this.shelfFromBottom,
     this.leftSide,

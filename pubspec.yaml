@@ -50,6 +50,7 @@ dependencies:
   intro_slider: ^2.3.1
   sliding_up_panel: ^1.0.2
   photo_view: ^0.9.2
+  overlay_support: ^1.0.4
 
 dev_dependencies:
   flutter_test:
@@ -73,6 +74,7 @@ flutter:
     - assets/box.jpg
     - assets/logo.png
     - assets/box_bg.png
+    - assets/compass.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

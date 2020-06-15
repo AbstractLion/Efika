@@ -1,7 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:efika/constants.dart';
 import 'package:efika/screens/intro_screen.dart';
-import 'package:efika/screens/order_fulfillment_save_item_screen.dart';
 import 'package:efika/screens/order_fulfillment_screen.dart';
 import 'package:expandable_bottom_bar/expandable_bottom_bar.dart';
 import 'package:flutter/material.dart';
@@ -80,8 +79,6 @@ class MyApp extends StatelessWidget {
             DefaultBottomBarController(
               child: OrderFulfillmentScreen(),
             ),
-        OrderFulfillmentSaveItemScreen.routeName: (context) =>
-            OrderFulfillmentSaveItemScreen(),
       },
     );
   }

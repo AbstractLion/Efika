@@ -4,6 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:efika/models/item.dart';
 import 'package:efika/models/order.dart';
 import 'package:efika/models/orders.dart';
+import 'package:efika/screens/order_fulfillment_save_item_screen.dart';
 import 'package:expandable_bottom_bar/expandable_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_compass/flutter_compass.dart';
@@ -87,8 +88,19 @@ class _OrderFulfillmentScreenState extends State<OrderFulfillmentScreen> {
                   text: 'Check Off',
                   color: Constants.accentColor,
                   onPressed: () {
-                    Navigator.of(context)
-                        .pushNamed('/order_fulfillment_save_item');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => OrderFulfillmentSaveItemScreen(
+                          itemIndex: currentItemIndex,
+                          setItemIndex: (index) {
+                            setState(() {
+                              this.currentItemIndex = index;
+                            });
+                          },
+                        ),
+                      ),
+                    );
                   },
                 ),
               ),
@@ -199,6 +211,7 @@ class _ItemDetailViewState extends State<ItemDetailView> {
                         ),
                       ),
                     ),
+                    _buildLabelText('Aisle #: ', widget.item.aisle.toString()),
                     Padding(
                       padding: EdgeInsets.only(bottom: 15),
                       child: Stack(
@@ -211,7 +224,8 @@ class _ItemDetailViewState extends State<ItemDetailView> {
                             showChartValuesInPercentage: false,
                             showChartValuesOutside: false,
                             chartRadius: 150,
-                            initialAngle: direction * pi / 180,
+                            initialAngle: -direction * pi / 180 +
+                                widget.item.bearingOffset,
                             chartValueStyle:
                                 TextStyle(color: Colors.transparent),
                             colorList: compassColorList,
@@ -244,6 +258,7 @@ class _ItemDetailViewState extends State<ItemDetailView> {
                         ],
                       ),
                     ),
+                    _buildLabelText('Item images:', ''),
                     CarouselSlider(
                       options: CarouselOptions(
                         aspectRatio: 2.0,
@@ -259,6 +274,24 @@ class _ItemDetailViewState extends State<ItemDetailView> {
           ],
         ),
       ],
+    );
+  }
+
+  Widget _buildLabelText(String label, String text) {
+    return Padding(
+      padding: EdgeInsets.only(bottom: 10),
+      child: RichText(
+        text: TextSpan(
+          style: TextStyle(color: Colors.black, fontSize: 20),
+          children: <TextSpan>[
+            TextSpan(
+              text: label,
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            TextSpan(text: text),
+          ],
+        ),
+      ),
     );
   }
 }

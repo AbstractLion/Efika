@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getflutter/getflutter.dart';
 
+import '../constants.dart';
+
 class UserAvatar extends StatelessWidget {
   final String imageUrl;
 
@@ -14,7 +16,7 @@ class UserAvatar extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: Colors.black12,
-              border: Border.all(color: Colors.black),
+              border: Border.all(color: Constants.backgroundColor),
             ),
             padding: EdgeInsets.all(15),
             child: Icon(

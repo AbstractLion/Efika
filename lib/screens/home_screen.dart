@@ -1,3 +1,4 @@
+import 'package:efika/models/user.dart';
 import 'package:efika/models/workers.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -23,7 +24,13 @@ class _HomeScreenState extends State<HomeScreen> {
       value: workerChangeNotifier,
       child: CoworkersScreen(),
     ),
-    ProfileScreen(),
+    ProfileScreen(User(
+      avatarUrl:
+          "https://media.discordapp.net/attachments/721448995322331167/721455140804231496/0.png",
+      fulfillments: 24,
+      itemsSaved: 152,
+      name: 'Leon Si',
+    )),
   ];
 
   int _currentTabIndex = 0;
