@@ -69,6 +69,7 @@ class _IntroScreenState extends State<IntroScreen> {
               "Efika makes sure that when a worker finds an item, that it'll be easy for the next worker to find it, even if they haven't ever seen it before.",
           decoration: pageDecoration,
         ),
+        /*
         PageViewModel(
           title:
               "Struggling with a slow and unorganized method of obtaining items?",
@@ -85,6 +86,8 @@ class _IntroScreenState extends State<IntroScreen> {
               "With enough information, Efika can generate an efficient path for a worker to retrieve all their items in one go, saving time and hassle.",
           decoration: pageDecoration,
         ),
+        // Didn't have time to implement this ^
+         */
         PageViewModel(
           title: "Worried about an incomplete inventory?",
           image: Container(
