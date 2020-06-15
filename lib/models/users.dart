@@ -15,7 +15,7 @@ class Users {
     usersList.forEach((user) {
       users.add(User(
         name: user['name'],
-        avatarUrl: user['avatarUrl'],
+        avatarUrl: r.nextDouble() > 0.5 ? user['avatarUrl'] : null,
         fulfillments: r.nextInt(100) + 10,
         itemsSaved: r.nextInt(300) + 20,
       ));
