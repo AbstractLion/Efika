@@ -1,12 +1,13 @@
 import 'package:efika/models/order.dart';
 import 'package:efika/models/orders.dart';
 import 'package:efika/screens/order_fulfillment_screen.dart';
-import 'package:efika/widgets/efika_app_bar.dart';
+import 'package:efika/screens/paccurate_screen.dart';
 import 'package:efika/widgets/user_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_beautiful_popup/main.dart';
 import 'package:flutter_beautiful_popup/templates/Common.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 
 import '../constants.dart';
@@ -22,8 +23,21 @@ class OrdersScreen extends StatelessWidget {
     );
 
     return Scaffold(
-      appBar: EfikaAppBar(
+      appBar: AppBar(
         title: Text('Orders'),
+        actions: <Widget>[
+          IconButton(
+            icon: FaIcon(FontAwesomeIcons.boxes),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PaccurateScreen(),
+                ),
+              );
+            },
+          ),
+        ],
       ),
       body: ListView.builder(
         itemCount: Orders.orders.length,

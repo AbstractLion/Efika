@@ -62,7 +62,8 @@ class _OrderFulfillmentScreenState extends State<OrderFulfillmentScreen> {
           StadiumBorder(side: BorderSide()),
         ),
         expandedBackColor: Colors.white,
-        expandedBody: ItemsListView(order, setCurrentItemIndex: (index) {
+        expandedBody: ItemsListView(order, index: currentItemIndex,
+            setCurrentItemIndex: (index) {
           setState(() {
             currentItemIndex = index;
           });
@@ -211,7 +212,7 @@ class _ItemDetailViewState extends State<ItemDetailView> {
                         ),
                       ),
                     ),
-                    _buildLabelText('Aisle #: ', widget.item.aisle.toString()),
+                    _buildLabelText('Aisle: ', widget.item.aisle.toString()),
                     Padding(
                       padding: EdgeInsets.only(bottom: 15),
                       child: Stack(
@@ -298,9 +299,10 @@ class _ItemDetailViewState extends State<ItemDetailView> {
 
 class ItemsListView extends StatefulWidget {
   final Order order;
+  final int index;
   final void Function(int) setCurrentItemIndex;
 
-  ItemsListView(this.order, {this.setCurrentItemIndex});
+  ItemsListView(this.order, {this.index, this.setCurrentItemIndex});
 
   @override
   State<StatefulWidget> createState() => _ItemsListViewState();
@@ -360,6 +362,9 @@ class _ItemsListViewState extends State<ItemsListView> {
                             item.name,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
+                              decoration: index < widget.index
+                                  ? TextDecoration.lineThrough
+                                  : TextDecoration.none,
                             ),
                           ),
                         ),

@@ -248,13 +248,16 @@ class _OrderFulfillmentSaveItemScreenState
           ),
           GFButton(
             text: 'Save',
-            onPressed: () {
+            onPressed: () async {
+              final double tmp = await FlutterCompass.events.first;
               showSimpleNotification(
-                Text("The item's orientation has been saved at "),
+                Text("The item's orientation has been saved at " +
+                    tmp.toString() +
+                    "°"),
                 background: Colors.green,
               );
             },
-          )
+          ),
         ],
       ),
       centerWidget: StreamBuilder<double>(

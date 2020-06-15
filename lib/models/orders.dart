@@ -25,8 +25,9 @@ class Orders {
       for (int j = 2; j <= maxItems; ++j) {
         currentItems.add(Items.items[r.nextInt(Items.items.length)]);
       }
-      randomItems.add(List<Item>()
-        ..add(Item(
+      currentItems.insert(
+        1,
+        Item(
           id: r.nextInt(9999999),
           name: 'Nestlé Multigrain Cheerios',
           imageUrl:
@@ -44,8 +45,9 @@ class Orders {
             'https://i.ibb.co/h1VddtK/image.jpg',
             'https://c8.alamy.com/comp/HWEF2J/breakfast-cereal-for-sale-in-a-morrisons-supermarket-HWEF2J.jpg',
           ],
-        ))
-        ..addAll(currentItems));
+        ),
+      );
+      randomItems.add(currentItems);
     }
     randomDates.sort();
 
