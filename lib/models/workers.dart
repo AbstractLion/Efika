@@ -10,9 +10,19 @@ class Workers with ChangeNotifier implements Searcher<User> {
       name: 'Dragon He',
       avatarUrl:
           'https://media-exp1.licdn.com/dms/image/C4D03AQEyzcJ9UyrGtA/profile-displayphoto-shrink_200_200/0?e=1597276800&v=beta&t=n0_a6sYJQuYiyCQ8Aa3XhqPSLZWOPn6IZPJXqawjhYQ',
+      itemsSaved: 43,
+      fulfillments: 12,
     ),
-    User(name: 'Avaneesh Kulkarni'),
-    User(name: 'Kevin Wang'),
+    User(
+      name: 'Avaneesh Kulkarni',
+      itemsSaved: 412,
+      fulfillments: 74,
+    ),
+    User(
+      name: 'Kevin Wang',
+      itemsSaved: 52,
+      fulfillments: 14,
+    ),
     ...Users.users.skip(30)
   ];
 
