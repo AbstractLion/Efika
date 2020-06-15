@@ -69,10 +69,8 @@ class _IntroScreenState extends State<IntroScreen> {
               "Efika makes sure that when a worker finds an item, that it'll be easy for the next worker to find it, even if they haven't ever seen it before.",
           decoration: pageDecoration,
         ),
-        /*
         PageViewModel(
-          title:
-              "Struggling with a slow and unorganized method of obtaining items?",
+          title: "Need to reduce friction and speed up your deliveries?",
           image: Container(
             child: Center(
               child: FaIcon(
@@ -83,24 +81,7 @@ class _IntroScreenState extends State<IntroScreen> {
             ),
           ),
           body:
-              "With enough information, Efika can generate an efficient path for a worker to retrieve all their items in one go, saving time and hassle.",
-          decoration: pageDecoration,
-        ),
-        // Didn't have time to implement this ^
-         */
-        PageViewModel(
-          title: "Worried about an incomplete inventory?",
-          image: Container(
-            child: Center(
-              child: FaIcon(
-                FontAwesomeIcons.boxes,
-                color: Colors.white,
-                size: 200,
-              ),
-            ),
-          ),
-          body:
-              "Efika is to be used by both customers and workers, so that customers can also contribute to helping populate an exhaustive inventory for your store.",
+              "Efika allows workers to locate exactly where an item is instead of wasting time scanning the aisles.",
           decoration: pageDecoration,
         ),
         PageViewModel(
